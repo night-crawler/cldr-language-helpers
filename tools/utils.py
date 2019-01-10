@@ -126,6 +126,12 @@ def unfold_char_range(char_range: str):
     return chars
 
 
+def remove_escapes(raw_str: str) -> str:
+    if raw_str == '\\' * 2:
+        return '\\'
+    return raw_str.lstrip('\\')
+
+
 def process_cldr_chars(chars: str) -> t.List[str]:
     r"""
     >>> process_cldr_chars('[\- а-е щ  {а\u0301}]')
@@ -145,7 +151,7 @@ def process_cldr_chars(chars: str) -> t.List[str]:
         pass
 
     chars = [strip_prefix_brackets(ch, '{}') for ch in chars]
-    chars = [ch.lstrip('\\') for ch in chars]
+    chars = [remove_escapes(ch) for ch in chars]
 
     chars = sorted(
         c
