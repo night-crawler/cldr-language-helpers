@@ -18,16 +18,29 @@ class UcharToLangMapSerializer:
     def _build_uchar_to_lang_map(self):
         lang_map = self._lang_map
 
+        lang_index_map = {}
         uchar_to_lang_map = defaultdict(lambda: [])
 
         for lang_code, lang_bundle in lang_map.items():
             for exemplars_key_name in conf.EXEMPLAR_KEY_NAMES:
+
+                full_lang_name = f'{lang_code}::{exemplars_key_name}'
+                if full_lang_name not in lang_index_map:
+                    lang_index_map[full_lang_name] = len(lang_index_map)
+
+                lang_index = lang_index_map[full_lang_name]
+
                 exemplars = get_key_recursive(lang_map, lang_code, exemplars_key_name, [])
 
-                for char in exemplars:
-                    uchar_to_lang_map[char].append(f'{lang_code}::{exemplars_key_name}')
+                for chars in exemplars:
+                    uchar_to_lang_map[chars].append(lang_index)
+                    for char in chars:
+                        uchar_to_lang_map[char].append(lang_index)
 
-        return uchar_to_lang_map
+        return {
+            'lang_index': lang_index_map,
+            'char_map': uchar_to_lang_map,
+        }
 
     def __call__(self, do_compress_char_ranges: bool = False, **kwargs):
         return json.dump(

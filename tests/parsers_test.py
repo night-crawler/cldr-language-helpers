@@ -92,7 +92,7 @@ class CLDRExemplarCharactersSerializerTest:
     def test__extract_exemplar_characters_bas(self, characters_node_bas):
         parser = CLDRExemplarCharactersSerializer(characters_node_bas)
         chars = parser._get_main_exemplar_characters(False)
-        print(chars)
+        assert 'a\u1DC6a\u1DC7' in chars
 
     def test_inits_with_chars(self, characters_node):
         parser = CLDRExemplarCharactersSerializer(characters_node)
