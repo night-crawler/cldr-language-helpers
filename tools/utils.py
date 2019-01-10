@@ -2,6 +2,8 @@ import codecs
 import itertools
 import typing as t
 
+sentinel = object()
+
 
 def unescape_unicode(raw_str: str):
     """
@@ -20,11 +22,24 @@ def unescape_unicode(raw_str: str):
 
 
 def strip_prefix_brackets(raw_str: str, brackets='[]') -> str:
+    if not raw_str:
+        return raw_str
+
     tmp = raw_str
+    has_stripped = False
+
     if not tmp.startswith(f'\\{brackets[0]}'):
-        tmp = tmp.lstrip(brackets[0])
+        if tmp[0] == brackets[0]:
+            tmp = tmp[1:]
+            has_stripped = True
     if not tmp.endswith(f'\\{brackets[1]}'):
-        tmp = tmp.rstrip(brackets[1])
+        if tmp[-1] == brackets[-1]:
+            tmp = tmp[:-1]
+            has_stripped = True
+
+    if has_stripped:
+        return strip_prefix_brackets(tmp, brackets)
+
     return tmp
 
 
@@ -154,3 +169,28 @@ def compress_char_ranges(chars: t.List[str]) -> t.List[str]:
         *char_ranges(single_chars),
         *other_chars
     ]
+
+
+def get_key_recursive(lang_map, lang_code, key_name, default=None):
+    """
+    >>> lang_map = {
+    >>>     'ru': {'first': ['a']},
+    >>>     'ru_RU': {'second': ['b']},
+    >>>     'ru_RU_SOMETHING': {},
+    >>> }
+    >>> assert get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'first', 1) == ['a']
+    >>> assert get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'bla', 1) == 1
+    >>> assert get_key_recursive(lang_map, 'ru_RU', 'second', 1) == ['b']
+    """
+    key_val = lang_map.get(lang_code, {}).get(key_name, sentinel)
+
+    if key_val is not sentinel:
+        return key_val
+
+    parts = lang_code.split('_')
+    parts.pop()
+    if not parts:
+        return default
+
+    _lang_code = '_'.join(parts)
+    return get_key_recursive(lang_map, _lang_code, key_name, default)

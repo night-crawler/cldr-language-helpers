@@ -22,3 +22,11 @@ DATA_PATH: Path = PACKAGE_PATH / 'data'
 assert DATA_PATH.exists()
 
 DATA_LANGUAGES_JSON: Path = DATA_PATH / 'languages.json'
+
+EXEMPLAR_KEY_NAMES = [
+    'main',
+    'auxiliary',
+    'index',
+    'numbers',
+    'punctuation',
+]

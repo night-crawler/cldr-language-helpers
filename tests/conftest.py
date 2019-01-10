@@ -1,10 +1,9 @@
 import pytest
+
 from lxml import etree
 
 from tools import conf
-from tools.parsers import (
-    SupplementalDataParser
-)
+from tools.parsers import SupplementalDataParser
 
 pytestmark = [
     pytest.mark.tools,

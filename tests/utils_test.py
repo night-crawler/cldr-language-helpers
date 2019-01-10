@@ -31,5 +31,27 @@ class UtilsTest:
     def test_process_cldr_chars(self):
         assert utils.process_cldr_chars(r'[ \- а-е щ  {а\u0301}]') == [' ', '-', 'а', 'а́', 'б', 'в', 'г', 'д', 'е', 'щ']
 
+    def test_process_cldr_chars_2(self):
+        chars = utils.process_cldr_chars(r'[‐ – , ፡ ፣ ፤ ፥ ፦ ! ? . ። ‹ › « » ( ) \[ \]]')
+        assert '[' in chars
+        assert ']' in chars
+
     def test_compress_chars_to_range(self):
         assert utils.compress_char_ranges(['a', 'b', 'c', 'e', 'f', 'qq']) == [('a', 'c'), 'e', 'f', 'qq']
+
+    def test_get_key_recursive(self):
+        lang_map = {
+            'ru': {
+                'first': ['a']
+            },
+            'ru_RU': {
+                'second': ['b']
+            },
+            'ru_RU_SOMETHING': {
+
+            }
+        }
+
+        assert utils.get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'first', 1) == ['a']
+        assert utils.get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'bla', 1) == 1
+        assert utils.get_key_recursive(lang_map, 'ru_RU', 'second', 1) == ['b']
