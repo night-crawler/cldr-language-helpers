@@ -151,6 +151,8 @@ def process_cldr_chars(chars: str) -> t.List[str]:
         pass
 
     chars = [strip_prefix_brackets(ch, '{}') for ch in chars]
+    # :(
+    chars = [ch.replace('}{', '') for ch in chars]
     chars = [remove_escapes(ch) for ch in chars]
 
     chars = sorted(

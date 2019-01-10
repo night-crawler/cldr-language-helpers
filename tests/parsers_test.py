@@ -89,6 +89,11 @@ class CLDRExemplarCharactersSerializerTest:
         chars = parser._get_punctuation_exemplar_characters(False)
         assert '\\' in chars
 
+    def test__extract_exemplar_characters_bas(self, characters_node_bas):
+        parser = CLDRExemplarCharactersSerializer(characters_node_bas)
+        chars = parser._get_main_exemplar_characters(False)
+        print(chars)
+
     def test_inits_with_chars(self, characters_node):
         parser = CLDRExemplarCharactersSerializer(characters_node)
         assert 'main' in parser()
