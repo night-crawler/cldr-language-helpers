@@ -357,9 +357,6 @@
     "territory": "GH"
   },
   "am": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u1200",
       "\u1208",
@@ -3146,9 +3143,6 @@
     ]
   },
   "bs_Cyrl": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0402",
       "\u0408",
@@ -3428,9 +3422,6 @@
     "territory": "IT"
   },
   "ccp": {
-    "auxiliary": [
-      " "
-    ],
     "characterOrder": "left-to-right",
     "index": [
       "\ud804\udd03",
@@ -3809,9 +3800,6 @@
     "territory": "UG"
   },
   "chr": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u13a0",
       "\u13a6",
@@ -11177,9 +11165,6 @@
     "territory": "HU"
   },
   "hy": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0531",
       "\u0532",
@@ -16442,9 +16427,6 @@
     "territory": "KE"
   },
   "kk": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0401",
       "\u0406",
@@ -32478,9 +32460,6 @@
     "territory": "MK"
   },
   "ml": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0d05",
       "\u0d06",
@@ -32977,9 +32956,6 @@
     "territory": "IN"
   },
   "ms": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "A",
       "B",
@@ -35277,9 +35253,6 @@
     "territory": "IN"
   },
   "os": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0401",
       "\u0410",
@@ -35903,9 +35876,6 @@
     "territory": "PL"
   },
   "prg": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "A",
       "B",
@@ -36983,15 +36953,9 @@
     "territory": "TZ"
   },
   "root": {
-    "auxiliary": [
-      " "
-    ],
     "characterOrder": "left-to-right",
     "language": "root",
     "lineOrder": "top-to-bottom",
-    "main": [
-      " "
-    ],
     "numbers": [
       "%",
       "+",
@@ -39045,9 +39009,6 @@
     "territory": "ZW"
   },
   "so": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "B",
       "C",
@@ -43584,9 +43545,6 @@
     "territory": "LR"
   },
   "vi": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "A",
       "B",

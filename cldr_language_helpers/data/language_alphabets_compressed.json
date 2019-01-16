@@ -254,9 +254,6 @@
     "territory": "GH"
   },
   "am": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u1200",
       "\u1208",
@@ -2156,9 +2153,6 @@
     ]
   },
   "bs_Cyrl": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0402",
       [
@@ -2350,9 +2344,6 @@
     "territory": "IT"
   },
   "ccp": {
-    "auxiliary": [
-      " "
-    ],
     "characterOrder": "left-to-right",
     "index": [
       [
@@ -2549,9 +2540,6 @@
     "territory": "UG"
   },
   "chr": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u13a0",
       "\u13a6",
@@ -7938,9 +7926,6 @@
     "territory": "HU"
   },
   "hy": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       [
         "\u0531",
@@ -11392,9 +11377,6 @@
     "territory": "KE"
   },
   "kk": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0401",
       "\u0406",
@@ -15017,9 +14999,6 @@
     "territory": "MK"
   },
   "ml": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       [
         "\u0d05",
@@ -15329,9 +15308,6 @@
     "territory": "IN"
   },
   "ms": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       [
         "A",
@@ -16784,9 +16760,6 @@
     "territory": "IN"
   },
   "os": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       "\u0401",
       [
@@ -17225,9 +17198,6 @@
     "territory": "PL"
   },
   "prg": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       [
         "A",
@@ -17979,15 +17949,9 @@
     "territory": "TZ"
   },
   "root": {
-    "auxiliary": [
-      " "
-    ],
     "characterOrder": "left-to-right",
     "language": "root",
     "lineOrder": "top-to-bottom",
-    "main": [
-      " "
-    ],
     "numbers": [
       "%",
       [
@@ -19388,9 +19352,6 @@
     "territory": "ZW"
   },
   "so": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       [
         "B",
@@ -22108,9 +22069,6 @@
     "territory": "LR"
   },
   "vi": {
-    "auxiliary": [
-      " "
-    ],
     "index": [
       [
         "A",

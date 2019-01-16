@@ -141,8 +141,12 @@ def process_cldr_chars(chars: str) -> t.List[str]:
     chars = strip_prefix_brackets(chars, '[]')
     chars = unescape_unicode(chars)
 
+    if not chars:
+        return []
+
     # split explicitly by ' ' in order to protect other whitespace characters
     chars = list(set(chars.split(' ')))
+
 
     try:
         chars.remove('')
