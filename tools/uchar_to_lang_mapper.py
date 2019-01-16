@@ -19,7 +19,7 @@ class UcharToLangMapSerializer:
         lang_map = self._lang_map
 
         lang_index_map = {}
-        uchar_to_lang_map = defaultdict(lambda: [])
+        uchar_to_lang_map = defaultdict(lambda: set())
 
         for lang_code, lang_bundle in lang_map.items():
             for exemplars_key_name in conf.EXEMPLAR_KEY_NAMES:
@@ -33,9 +33,11 @@ class UcharToLangMapSerializer:
                 exemplars = get_key_recursive(lang_map, lang_code, exemplars_key_name, [])
 
                 for chars in exemplars:
-                    uchar_to_lang_map[chars].append(lang_index)
+                    uchar_to_lang_map[chars].add(lang_index)
                     for char in chars:
-                        uchar_to_lang_map[char].append(lang_index)
+                        uchar_to_lang_map[char].add(lang_index)
+
+        uchar_to_lang_map = {uchar: sorted(lang_indexes) for uchar, lang_indexes in uchar_to_lang_map.items()}
 
         return {
             'lang_index': lang_index_map,
