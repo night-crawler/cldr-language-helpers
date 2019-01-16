@@ -1,7 +1,7 @@
 import json
+from . import conf
 
-
-UCHAR_TO_LANG_MAP = json.load(open('./data/uchar_to_lang_map.json'))
+UCHAR_TO_LANG_MAP = json.load(conf.UCHAR_TO_LANG_MAP_PATH.open())
 
 
 class StringAnnotator(str):

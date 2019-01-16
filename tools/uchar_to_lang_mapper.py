@@ -21,9 +21,8 @@ class UcharToLangMapSerializer:
         lang_index_map = {}
         uchar_to_lang_map = defaultdict(lambda: set())
 
-        for lang_code, lang_bundle in lang_map.items():
-            for exemplars_key_name in conf.EXEMPLAR_KEY_NAMES:
-
+        for exemplars_key_name in conf.EXEMPLAR_KEY_NAMES:
+            for lang_code, lang_bundle in lang_map.items():
                 full_lang_name = f'{lang_code}::{exemplars_key_name}'
                 if full_lang_name not in lang_index_map:
                     lang_index_map[full_lang_name] = len(lang_index_map)
