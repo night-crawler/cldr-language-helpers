@@ -4,6 +4,8 @@ import json
 from collections import defaultdict
 from functools import reduce, lru_cache
 
+from funcy import cached_property
+
 from . import conf
 
 # {
@@ -46,7 +48,7 @@ def get_possible_langs_by_char(char):
         return langs_set
 
     if re.match(r'\s', char):
-        return {'space'}
+        return ALL_LANGUAGES
 
     return {'unknown'}
 
@@ -63,42 +65,44 @@ def get_possible_char_types_by_char(char):
 
 
 class StringAnnotator(str):
-    @property
-    @lru_cache(None)
+    @cached_property
     def langs_by_index(self) -> t.List[t.Set[str]]:
         return [get_possible_langs_by_char(char) for char in self]
 
-    @property
-    @lru_cache(None)
+    @cached_property
     def char_types_by_index(self) -> t.List[t.Set[str]]:
         return [get_possible_char_types_by_char(char) for char in self]
 
-    @property
-    @lru_cache(None)
+    @cached_property
     def all_langs(self) -> t.Set[str]:
         accum = set()
         for lbi in self.langs_by_index:
             accum |= lbi
         return accum
 
-    @property
-    @lru_cache(None)
+    @cached_property
     def langs_intersection(self):
         return set.intersection(*self.langs_by_index)
 
-    @property
-    @lru_cache(None)
+    @cached_property
     def char_types_intersection(self):
         return set.intersection(*self.char_types_by_index)
 
-    @property
-    @lru_cache(None)
+    @cached_property
     def lang_stats(self) -> t.Dict[str, int]:
         stats = defaultdict(lambda: 0)
-        for lbi in self.langs_by_index:
+        for lbi, is_space in zip(self.langs_by_index, self.spaces_by_index):
+            if is_space:
+                stats['space'] += 1
+                continue
+
             for lang in lbi:
                 stats[lang] += 1
         return stats
+
+    @cached_property
+    def spaces_by_index(self):
+        return [bool(re.match(r'\s', char)) for char in self]
 
     def has_langs(self, *langs) -> bool:
         if not self:
@@ -159,20 +163,35 @@ class StringAnnotator(str):
         if not self:
             return
 
-        start_pos = 0
-        langs_intersection = self.langs_by_index[0]
+        def reducer(state, item):
+            pos, [langs_set, is_space] = item
 
-        for pos, langs_set in enumerate(self.langs_by_index):
-            langs_intersection = langs_intersection.intersection(langs_set)
-            if not langs_intersection and pos:
-                yield start_pos, pos
-                langs_intersection = langs_set
-                start_pos = pos
+            if not state:
+                return [[pos, pos + 1, langs_set, is_space]]
 
-        yield start_pos, len(self)
+            prev_start, prev_finish, prev_intersection, prev_is_space = state[-1]
+            intersection = prev_intersection & langs_set
+
+            if is_space:
+                if prev_is_space:
+                    state[-1][1] = pos + 1
+                    return state
+                return state + [[pos, pos + 1, langs_set, is_space]]
+
+            if prev_is_space:
+                return state + [[pos, pos + 1, langs_set, is_space]]
+
+            if intersection:
+                state[-1][1] = pos + 1
+                state[-1][2] = intersection
+                return state
+
+            return state + [[pos, pos + 1, langs_set, is_space]]
+
+        return reduce(reducer, enumerate(zip(self.langs_by_index, self.spaces_by_index)), [])
 
     def iter_split_by_lang_intersection(self):
-        for start, stop in self._split_by_lang_intersection_ranges():
+        for start, stop, *rest in self._split_by_lang_intersection_ranges():
             yield self[start:stop]
 
     def split_by_lang_intersection(self):
