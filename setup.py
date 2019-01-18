@@ -13,6 +13,7 @@ setup(
     name='cldr-language-helpers',
     version=__version__,
     packages=['cldr_language_helpers'],
+    package_data={'cldr_language_helpers': ['data/*.json']},
     url='https://github.com/night-crawler/cldr-language-helpers',
     license='MIT',
     author='night-crawler',
