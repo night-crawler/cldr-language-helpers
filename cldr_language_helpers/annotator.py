@@ -1,8 +1,8 @@
+import json
 import re
 import typing as t
-import json
 from collections import defaultdict
-from functools import reduce, lru_cache
+from functools import lru_cache, reduce
 
 from funcy import cached_property
 
