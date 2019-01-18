@@ -7,13 +7,13 @@ pytestmark = [pytest.mark.helper, pytest.mark.annotate]
 
 # noinspection PyMethodMayBeStatic
 class StringAnnotatorTest:
-    def test_used_char_types(self):
+    def test_char_types_by_index(self):
         assert StringAnnotator('123').char_types_by_index == [{'numbers'}, {'numbers'}, {'numbers'}]
 
-    def test_used_languages(self):
+    def test_langs_by_index(self):
         assert 'ru_RU' in StringAnnotator('ф').langs_by_index[0]
 
-    def test_langs(self):
+    def test_all_langs(self):
         assert {'ru_RU', 'en_US', 'en', 'ru'}.issubset(StringAnnotator('йцу 123 qwe LOL').all_langs)
 
     def test_lang_stats(self):
@@ -23,11 +23,11 @@ class StringAnnotatorTest:
         assert stats['en'] == 3
         assert stats['space'] == 1
 
-    def test_get_lang_intersection(self):
+    def test_langs_intersection(self):
         sa = StringAnnotator('somesortof123')
         assert 'en' in sa.langs_intersection
 
-    def test_get_char_type_intersection(self):
+    def test_char_types_intersection(self):
         assert StringAnnotator('somesortof123').char_types_intersection == set()
         assert StringAnnotator('somesortof').char_types_intersection == {'auxiliary', 'main'}
         assert StringAnnotator(' ').char_types_intersection == {'space'}
