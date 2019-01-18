@@ -75,10 +75,11 @@ class StringAnnotator(str):
 
     @cached_property
     def all_langs(self) -> t.Set[str]:
-        accum = set()
-        for lbi in self.langs_by_index:
-            accum |= lbi
-        return accum
+        return reduce(lambda x, y: x | y, self.langs_by_index)
+
+    @cached_property
+    def all_char_types(self):
+        return reduce(lambda x, y: x | y, self.char_types_by_index)
 
     @cached_property
     def langs_intersection(self):

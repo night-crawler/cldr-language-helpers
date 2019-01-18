@@ -16,6 +16,10 @@ class StringAnnotatorTest:
     def test_all_langs(self):
         assert {'ru_RU', 'en_US', 'en', 'ru'}.issubset(StringAnnotator('йцу 123 qwe LOL').all_langs)
 
+    def test_all_char_types(self):
+        assert StringAnnotator('йцу 123, qwe LOL').all_char_types == \
+               {'numbers', 'main', 'index', 'space', 'auxiliary', 'punctuation'}
+
     def test_lang_stats(self):
         stats = StringAnnotator('qwe йцу').lang_stats
         assert stats['ru_RU'] == 3
