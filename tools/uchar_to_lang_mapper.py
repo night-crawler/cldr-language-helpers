@@ -1,9 +1,9 @@
 import json
 from collections import defaultdict
 
+from cldr_language_helpers.utils import get_key_recursive
 from tools import conf
 from tools.parsers import MainLanguagesSerializer
-from tools.utils import get_key_recursive
 
 
 class UcharToLangMapSerializer:

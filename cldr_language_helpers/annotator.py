@@ -2,7 +2,7 @@ import json
 import re
 import typing as t
 from collections import defaultdict
-from functools import lru_cache, reduce
+from functools import reduce
 
 from funcy import cached_property
 

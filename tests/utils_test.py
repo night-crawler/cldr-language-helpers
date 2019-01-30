@@ -1,5 +1,6 @@
 import codecs
 
+from cldr_language_helpers.utils import get_key_recursive
 from tools import utils
 
 
@@ -65,6 +66,6 @@ class UtilsTest:
             }
         }
 
-        assert utils.get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'first', 1) == ['a']
-        assert utils.get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'bla', 1) == 1
-        assert utils.get_key_recursive(lang_map, 'ru_RU', 'second', 1) == ['b']
+        assert get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'first', 1) == ['a']
+        assert get_key_recursive(lang_map, 'ru_RU_SOMETHING', 'bla', 1) == 1
+        assert get_key_recursive(lang_map, 'ru_RU', 'second', 1) == ['b']
